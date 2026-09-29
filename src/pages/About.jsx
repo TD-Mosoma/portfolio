@@ -25,7 +25,7 @@ const businessSkills = [
 const stats = [
   { value: '82%', label: 'Academic average' },
   { value: '3rd', label: 'AfriHack \u201926' },
-  { value: '2×', label: 'Hackathon finalist' },
+  { value: '3×', label: 'Hackathon finalist' },
   { value: '10', label: 'Anthropic AI certificates' },
 ]
 
@@ -57,7 +57,7 @@ const experience = [
 ]
 
 const achievements = [
-  '2× Hackathon Finalist',
+  '3× Hackathon Finalist',
   'AfriHack \u201926: 3rd place',
   'Scrum Fundamentals Certified',
   '10 Anthropic AI certificates',

@@ -1,4 +1,4 @@
-import teamPhoto from '../assets/Profile-3.jpg'
+import teamPhoto from '../assets/profile-3.jpg'
 
 const projects = [
   {
