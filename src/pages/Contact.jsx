@@ -104,7 +104,7 @@ function Contact() {
             ))}
           </div>
 
-          <a href="/Tebogo_Mosoma_CV_updated.pdf" download className="btn btn--ghost btn--sm">
+          <a href="/Tebogo_Mosoma_CV_Updated.pdf" download className="btn btn--ghost btn--sm">
             ⬇ Download CV
           </a>
         </aside>

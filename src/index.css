@@ -20,6 +20,15 @@
   --max-width: 1150px;
 }
 
+:root[data-theme='light'] {
+  --bg: #f5f7fb;
+  --bg-soft: #eaf0f8;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #62718a;
+  --border: rgba(23, 32, 51, 0.12);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -29,6 +38,7 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 a {
@@ -64,6 +74,10 @@ img {
   border-bottom: 1px solid var(--border);
 }
 
+:root[data-theme='light'] .navbar {
+  background: rgba(245, 247, 251, 0.88);
+}
+
 .navbar__inner {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -85,6 +99,7 @@ img {
 .navbar__links {
   display: flex;
   gap: 2rem;
+  margin-left: auto;
 }
 
 .navbar__link {
@@ -123,6 +138,37 @@ img {
   color: var(--text);
   font-size: 1.6rem;
   cursor: pointer;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-left: 2rem;
+}
+
+.navbar__theme-toggle {
+  min-height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--bg-soft);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+
+.navbar__theme-toggle:hover {
+  border-color: var(--primary);
+  transform: rotate(8deg);
 }
 
 /* ---------- Hero ---------- */
@@ -175,23 +221,117 @@ img {
 
 .hero__image-wrap {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 1rem;
+}
+
+.hero__photo-btn {
+  position: relative;
+  width: min(420px, 82vw);
+  height: min(420px, 82vw);
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.hero__photo-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 6px;
+  border-radius: 50%;
 }
 
 .hero__image-ring {
+  position: relative;
+  z-index: 2;
   padding: 6px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   box-shadow: 0 20px 60px rgba(56, 189, 248, 0.2);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero__photo-btn:hover .hero__image-ring,
+.hero__photo-btn--open .hero__image-ring {
+  transform: scale(1.02);
+  box-shadow: 0 24px 70px rgba(56, 189, 248, 0.32);
 }
 
 .hero__image {
-  width: min(340px, 70vw);
-  height: min(340px, 70vw);
+  width: min(300px, 58vw);
+  height: min(300px, 58vw);
   object-fit: cover;
   object-position: top center;
   border-radius: 50%;
   border: 6px solid var(--bg);
+}
+
+.hero__skills-orbit {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.72);
+  transition: opacity 0.35s ease, transform 0.4s ease;
+}
+
+.hero__skills-orbit--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero__skill {
+  --angle: calc((360deg / var(--total)) * var(--i));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--angle)) translate(min(190px, 36vw)) rotate(calc(-1 * var(--angle)));
+}
+
+.hero__skill-label {
+  display: inline-block;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.35s ease;
+}
+
+.hero__skills-orbit--visible .hero__skill-label {
+  opacity: 1;
+  animation: skill-pop 0.45s ease both;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+@keyframes skill-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.hero__photo-hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 /* ---------- Buttons ---------- */
@@ -355,6 +495,11 @@ img {
 @media (max-width: 560px) {
   .highlights__grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero__skill-label {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.55rem;
   }
 }
 

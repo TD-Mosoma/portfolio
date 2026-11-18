@@ -8,7 +8,7 @@ const links = [
   { to: '/contact', label: 'Contact Me' },
 ]
 
-function Navbar() {
+function Navbar({ theme, onThemeToggle }) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -18,14 +18,26 @@ function Navbar() {
           Tebogo<span>.</span>
         </NavLink>
 
-        <button
-          className="navbar__toggle"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle navigation menu"
-          aria-expanded={open}
-        >
-          {open ? '✕' : '☰'}
-        </button>
+        <div className="navbar__actions">
+          <button
+            type="button"
+            className="navbar__theme-toggle"
+            onClick={onThemeToggle}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          </button>
+
+          <button
+            className="navbar__toggle"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={open}
+          >
+            {open ? '✕' : '☰'}
+          </button>
+        </div>
 
         <nav className={`navbar__links ${open ? 'navbar__links--open' : ''}`}>
           {links.map((link) => (

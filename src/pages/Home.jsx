@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import profilePhoto from '../assets/profile-2.jpeg'
 
@@ -22,7 +23,7 @@ const highlights = [
     title: 'Hackathon Achievements',
     text: '3rd place at AfriHack \u201926, Momentum AI Hackathon finalist, and Top 10 finalist at the Learniverse hackathon.',
   },
-    {
+  {
     icon: '🏅',
     title: 'Student-Athlete',
     text: 'Middle-distance track and field athlete who has competed provincially and nationally, and won a provincial bronze medal in 2025.',
@@ -34,7 +35,20 @@ const highlights = [
   },
 ]
 
+const featuredSkills = [
+  'React',
+  'JavaScript',
+  'Business Analysis',
+  'AI/ML',
+  'Python',
+  'Leadership',
+  'Software Development',
+  'Data analytics',
+]
+
 function Home() {
+  const [skillsOpen, setSkillsOpen] = useState(false)
+
   return (
     <>
       {/* Hero */}
@@ -61,16 +75,39 @@ function Home() {
             <Link to="/contact" className="btn btn--outline">
               Contact Me
             </Link>
-            <a href="/Tebogo_Mosoma_CV_updated.pdf" download className="btn btn--ghost">
+            <a href="/Tebogo_Mosoma_CV_Updated.pdf" download className="btn btn--ghost">
               ⬇ Download CV
             </a>
           </div>
         </div>
 
         <div className="hero__image-wrap">
-          <div className="hero__image-ring">
-            <img src={profilePhoto} alt="Tebogo Mosoma" className="hero__image" />
-          </div>
+          <button
+            type="button"
+            className={`hero__photo-btn${skillsOpen ? ' hero__photo-btn--open' : ''}`}
+            onClick={() => setSkillsOpen((open) => !open)}
+            aria-expanded={skillsOpen}
+            aria-label={skillsOpen ? 'Hide skills' : 'Show skills around profile photo'}
+          >
+            <div className="hero__image-ring">
+              <img src={profilePhoto} alt="Tebogo Mosoma" className="hero__image" />
+            </div>
+
+            <ul className={`hero__skills-orbit${skillsOpen ? ' hero__skills-orbit--visible' : ''}`} aria-hidden={!skillsOpen}>
+              {featuredSkills.map((skill, index) => (
+                <li
+                  key={skill}
+                  className="hero__skill"
+                  style={{ '--i': index, '--total': featuredSkills.length }}
+                >
+                  <span className="hero__skill-label">{skill}</span>
+                </li>
+              ))}
+            </ul>
+          </button>
+          <p className="hero__photo-hint">
+            {skillsOpen ? 'Click photo to hide skills' : 'Click photo to view skills'}
+          </p>
         </div>
       </section>
 

@@ -16,7 +16,9 @@ const technicalSkills = [
 const businessSkills = [
   'Business Analysis',
   'Requirements Analysis',
+  'Leadership',
   'Project Management',
+  'Teamwork',
   'Problem Solving',
   'Presentation',
   'Agile/Scrum',
@@ -25,8 +27,8 @@ const businessSkills = [
 const stats = [
   { value: '82%', label: 'Academic average' },
   { value: '3rd', label: 'AfriHack \u201926' },
-  { value: '3×', label: 'Hackathon finalist' },
-  { value: '10', label: 'Anthropic AI certificates' },
+  { value: '4×', label: 'Hackathon finalist' },
+  { value: '13', label: 'Anthropic AI certificates' },
 ]
 
 const experience = [
@@ -57,10 +59,10 @@ const experience = [
 ]
 
 const achievements = [
-  '3× Hackathon Finalist',
+  '4× Hackathon Finalist',
   'AfriHack \u201926: 3rd place',
   'Scrum Fundamentals Certified',
-  '10 Anthropic AI certificates',
+  '13 Anthropic AI certificates',
 ]
 
 function About() {
