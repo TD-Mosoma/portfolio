@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import profilePhoto from '../assets/profile-4.jpeg'
 
-// Paste your Formspree endpoint here, e.g. 'https://formspree.io/f/abcdwxyz'
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/tebogodanny19@gmail.com'
 
 const contactLinks = [
   {
@@ -38,13 +37,20 @@ function Contact() {
     setStatus('sending')
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: `New portfolio contact message from ${formData.name}`,
+          _template: 'table',
+        }),
       })
 
       if (response.ok) {
